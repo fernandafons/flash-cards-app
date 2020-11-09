@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>insert</ion-title>
+    <ion-title>Adicionar card</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,22 +12,29 @@
   <div id="container">
     <ion-item>
       <ion-label position="floating">Palavra a memorizar:</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="text" [(ngModel)]="card.targetLanguage" required></ion-input>
     </ion-item>
   </div>
 
   <div id="container">
     <ion-item>
       <ion-label position="floating">Tradução em português:</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="text" [(ngModel)]="card.motherLanguage" required></ion-input>
     </ion-item>
   </div>
 
-  <div id="container">
-    <ion-button expand="block" color="success" href="/home">Salvar</ion-button>
-  </div>
+
+  <ion-button 
+    class="ion-padding"
+    expand="block" 
+    color="success" 
+    (click)="createCard(card)"
+    >
+    Salvar
+  </ion-button>
+
   
-  <div id="container">
+
     <ion-button expand="block" color="tertiary" href="/home">Voltar</ion-button>
-  </div>
+
 </ion-content>
