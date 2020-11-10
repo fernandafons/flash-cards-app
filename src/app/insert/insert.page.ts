@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Card } from '../models/cards.mode';
 import { ToastController, LoadingController, NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
+// import { AngularFireDatabase } from "@angular/fire/firestore"
 import { AngularFirestore } from "@angular/fire/firestore"
 
 
@@ -24,7 +25,32 @@ cards: any;
 
   ngOnInit() {}
 
+  teste(card: Card) {
+    console.log("message aleatoria", card)
+    if (this.formValidation()) {
+      //show loader
+      let loader = this.loadingCtrl.create({
+        message: "Please wait..."
+      });
+      // (await loader).present();
+
+      try {
+        let a = this.firestore.collection("cards").add(card);
+        console.log("printando a", a)
+      } catch (e) {
+        this.showToast(e);
+      }
+
+      //dismiss loader
+      // (await loader).dismiss();
+
+      //redirect to home page
+      this.navCtrl.navigateRoot("home");
+    }
+  }
+
   async createCard(card: Card) {
+    console.log("!!!!!!!!!!card:", card)
     if (this.formValidation()) {
       //show loader
       let loader = this.loadingCtrl.create({
