@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController, LoadingController, NavController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from "@angular/fire/firestore"
+import { ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { CardService } from '../services/card.service';
 
 @Component({
   selector: 'app-practice',
@@ -9,52 +9,29 @@ import { AngularFirestore } from "@angular/fire/firestore"
   styleUrls: ['./practice.page.scss'],
 })
 export class PracticePage implements OnInit {
-  cards: any;
+  cards: Observable<any>;
 
   constructor(
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController,
-    private navCtrl: NavController,
-    private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore
+    private service: CardService
   ) { }
 
   ngOnInit() {
   }
-
-  async getCards() {
-    //show loader
-    let loader = this.loadingCtrl.create({
-      message: "Please wait..."
-    });
-    (await loader).present();
-
-    try {
-      this.firestore.collection("cards")
-      .snapshotChanges()
-      .subscribe(data => {
-        this.cards = data.map(e => {
-          return {
-            id: e.payload.doc.id,
-            targetLanguage: e.payload.doc.data()["targetLanguage"],
-            motherLanguage: e.payload.doc.data()["motherLanguage"]
-          };
-        });
-      });
-
-      //dismiss loader
-      (await loader).dismiss();
-
-    } catch(e) {
-      this.showToast(e);
-      
-    }
+  pesquisar() {
+    console.log('log')
+    this.cards = this.service.getAll();
+    console.log('estou com isso aqui ', this.cards)
   }
-  showToast(message: string) {
-    this.toastCtrl.create({
-      message: message,
-      duration: 3000
-    }).then(toastData => toastData.present());
-  }
+  // async getCards() {
+  //   this.cards = this.service.getAll();
+  //   console.log('this.cards ',this.cards)
+  // }
+  // showToast(message: string) {
+  //   this.toastCtrl.create({
+  //     message: message,
+  //     duration: 3000
+  //   }).then(toastData => toastData.present());
+  // }
 
 }

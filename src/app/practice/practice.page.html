@@ -5,13 +5,20 @@
 </ion-header>
 
 <ion-content>
-<ion-item-sliding *ngFor="let card of cards">
+<ion-item-sliding *ngFor="let card of cards | async">
+  
   <ion-label>
     <h2>{{card.targetLanguage}}</h2>
     <h1>{{card.motherLanguage}}</h1>
   </ion-label>
 </ion-item-sliding>
+
+<ion-button (click)="pesquisar()" expand="block" fill="solid">
+  Consultar Cards
+</ion-button>
+
   <div id="container">
     <ion-button expand="block" color="tertiary" href="/home">Voltar</ion-button>
   </div>
+
 </ion-content>

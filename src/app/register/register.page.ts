@@ -1,7 +1,7 @@
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.mode';
 import { ToastController, LoadingController, NavController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +30,7 @@ export class RegisterPage implements OnInit {
         (await loader).present();
 
         try {
-          await this.afAuth
+          await this.afAuth.auth
             .createUserWithEmailAndPassword(user.email, user.password)
             .then(data => {
               console.log(data);

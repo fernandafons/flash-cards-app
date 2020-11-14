@@ -1,7 +1,7 @@
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.mode';
 import { ToastController, LoadingController, NavController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -13,10 +13,10 @@ export class LoginPage implements OnInit {
   user = {} as User;
 
   constructor(
+    public navCtrl: NavController,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
-    private afAuth: AngularFireAuth,
-    private navCtrl: NavController
+    private frAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {}
@@ -30,8 +30,7 @@ export class LoginPage implements OnInit {
       (await loader).present();
 
       try {
-        await this.afAuth
-            .signInWithEmailAndPassword(user.email, user.password)
+        await this.frAuth.auth.signInWithEmailAndPassword(user.email, user.password)
             .then(data => {
               console.log(data);
 
