@@ -1,24 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>practice</ion-title>
+    <ion-title>Cards</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-item-sliding *ngFor="let card of cards | async">
-  
-  <ion-label>
-    <h2>{{card.targetLanguage}}</h2>
-    <h1>{{card.motherLanguage}}</h1>
-  </ion-label>
+<ion-item-sliding *ngIf="card">
+  <ion-card>
+    <ion-card-title>
+      <div style="text-align:center">
+        <h2>{{card.targetLanguage}}</h2>
+      </div>
+    </ion-card-title>
+    <ion-card-content>
+      <div style="text-align:center">
+        <h1>{{card.motherLanguage}}</h1>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-item-sliding>
-
-<ion-button (click)="pesquisar()" expand="block" fill="solid">
+<!-- <ion-button (click)="pesquisar()" expand="block" fill="solid">
   Consultar Cards
+</ion-button> -->
+<ion-button (click)="sortear()" color="success" expand="block" fill="solid">
+  Sorteio de Cards
 </ion-button>
-
   <div id="container">
     <ion-button expand="block" color="tertiary" href="/home">Voltar</ion-button>
   </div>
-
 </ion-content>

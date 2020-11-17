@@ -18,6 +18,11 @@ export class CardService {
       }));
   }
 
+  delete() {
+    const tutorialsRef = this.db.list(this.PATH);
+    tutorialsRef.remove('key');
+  }
+
   save(card: any) {
     console.log('salvando este dado ', card);
     return new Promise((resolve, reject) => {
