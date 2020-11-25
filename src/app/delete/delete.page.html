@@ -7,10 +7,15 @@
 <ion-content>
   <ion-item-sliding *ngFor="let card of cards | async">
   
-  <ion-label>
-    <h2>{{card.targetLanguage}}</h2>
+  <ion-card>
+    <h1>{{card.targetLanguage}}</h1>
     <h1>{{card.motherLanguage}}</h1>
-  </ion-label>
+    <ion-button (click)="delete(card.key)" 
+    expand="block" 
+    color="danger">
+      Deletar
+    </ion-button>
+  </ion-card>
 </ion-item-sliding>
 <!-- <p>Essa é a pag de delete</p> -->
 </ion-content>

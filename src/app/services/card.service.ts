@@ -18,9 +18,8 @@ export class CardService {
       }));
   }
 
-  delete() {
-    const tutorialsRef = this.db.list(this.PATH);
-    tutorialsRef.remove('key');
+  delete(key: string) {
+    return this.db.list(this.PATH).remove(key);
   }
 
   save(card: any) {

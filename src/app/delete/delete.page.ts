@@ -15,11 +15,21 @@ export class DeletePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.carregar_tela();
   }
+
+  carregar_tela(){
+    this.cards = this.service.getAll();
+  }
+
   pesquisar() {
     console.log('log')
-    this.cards = this.service.getAll();
     console.log('estou com isso aqui ', this.cards)
+  }
+
+  delete(key: string) {
+    this.service.delete(key);
+    this.carregar_tela();
   }
 
 }

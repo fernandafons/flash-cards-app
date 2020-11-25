@@ -48,12 +48,12 @@ export class LoginPage implements OnInit {
 
   formValidation() {
     if (!this.user.email){
-      this.showToast("Enter email");
+      this.showToast("Insira um email");
       return false;
     }
 
     if (!this.user.password){
-      this.showToast("Enter password");
+      this.showToast("Insira uma senha válida");
       return false;
     }
 
