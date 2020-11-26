@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CardService } from '../services/card.service';
+import { ModalController } from '@ionic/angular';
+import { ModalConfirmPage } from '../modais/modal-confirm/modal-confirm.page';
 
 @Component({
   selector: 'app-delete',
@@ -11,7 +13,8 @@ export class DeletePage implements OnInit {
   cards: Observable<any>;
 
   constructor(
-    private service: CardService
+    private service: CardService,
+    private modalcontroller: ModalController
   ) { }
 
   ngOnInit() {
@@ -27,8 +30,14 @@ export class DeletePage implements OnInit {
     console.log('estou com isso aqui ', this.cards)
   }
 
-  delete(key: string) {
-    this.service.delete(key);
+  async delete(key: string) {
+    const modal = await this.modalcontroller.create({
+      component: ModalConfirmPage,
+      componentProps: {'key': key}
+    })
+    modal.present();
+    console.log(key)
+    // this.service.delete(key);
     this.carregar_tela();
   }
 

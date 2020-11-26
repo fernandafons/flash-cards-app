@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'delete',
     loadChildren: () => import('./delete/delete.module').then( m => m.DeletePageModule)
   },
+  {
+    path: 'modal-confirm',
+    loadChildren: () => import('./modais/modal-confirm/modal-confirm.module').then( m => m.ModalConfirmPageModule)
+  },
 
 ];
 
